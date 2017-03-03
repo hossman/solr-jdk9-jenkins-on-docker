@@ -1,0 +1,16 @@
+
+
+* "bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)"
+
+* Not a fan of chmod a+w, or having files on disk owned by a UID/GID that don't exist as user/group in host os
+  * see nocommit in run-job.sh
+  * can't we make docker use the effective UID/GID of the user running "docker run ..." as the in-container user???
+    * worst case: pass the current UID/GID when building the image via '--build-arg' + ? ?
+
+* Can we support a blacklist of jdk9-ea build numbers in the even that we know "latest" contains a bug impacting lucene/solr?
+
+* Alternative to blacklisting versions: parameterize the jdk-9 build# used by the docker image
+  * by default it uses latest
+  * jenkins job could be configured with a specific version to override that if "latest" fails
+    * just tweak the jenkins build to use an explicit known working version (ex: "b158")  
+    * remove the explicit version from your jenkins job config once you know a new/working one is available
