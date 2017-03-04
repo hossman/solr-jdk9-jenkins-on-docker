@@ -19,26 +19,21 @@ FROM    openjdk:9-jdk
 
 # hack to work around weird crypto packaging issue in openjdk-9..
 # https://github.com/docker-library/openjdk/issues/101
-ENV JAVA_CONF_DIR=$JAVA_HOME/conf
-RUN bash -c '([[ ! -d $JAVA_SECURITY_DIR ]] && ln -s $JAVA_HOME/lib $JAVA_HOME/conf) || (echo "Found java conf dir, package has been fixed, remove this hack"; exit -1)'
-
-
+RUN bash -c '([[ ! -d $JAVA_HOME/conf ]] && ln -s $JAVA_HOME/lib $JAVA_HOME/conf) || (echo "Found java conf dir, package has been fixed, remove this hack"; exit -1)'
 
 ENV JENKINS_GID=7000
 ENV JENKINS_UID=7000
-
 RUN groupadd --gid $JENKINS_GID jenkins && \
   adduser --quiet --gecos "" --disabled-password --uid $JENKINS_UID --gid $JENKINS_GID jenkins
 
 # add ant
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   apt-get update && \
-  apt-get -y install ant unzip && \
+  apt-get -y install apt-utils ant unzip git && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV LANGUAGE en_US:en
 ENV LANG en_US.UTF-8
-ENV LC_ALL en_US.UTF-8
 
 USER jenkins

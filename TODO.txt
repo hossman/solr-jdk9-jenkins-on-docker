@@ -1,11 +1,6 @@
 
-
-* "bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)"
-
-* Not a fan of chmod a+w, or having files on disk owned by a UID/GID that don't exist as user/group in host os
-  * see nocommit in run-job.sh
-  * can't we make docker use the effective UID/GID of the user running "docker run ..." as the in-container user???
-    * worst case: pass the current UID/GID when building the image via '--build-arg' + ? ?
+* ugrade docker and start using ARG in the Dockerfile to set JENKINS_UID/GID == outer-host effective UID
+  * see also TODO in run-job.sh
 
 * Can we support a blacklist of jdk9-ea build numbers in the even that we know "latest" contains a bug impacting lucene/solr?
 

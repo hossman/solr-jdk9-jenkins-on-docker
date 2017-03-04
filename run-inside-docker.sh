@@ -23,11 +23,21 @@
 set -e
 set -x
 
-cd lucene-solr || (echo "Git checkout was not initialized" && exit -1)
-
 java -version
 ant -version
-ant ivy-bootstrap
+
+if [ ! -d lucene-solr ]; then
+  git clone https://git-wip-us.apache.org/repos/asf/lucene-solr.git
+fi
+cd lucene-solr
+
+git clean -fx
+git fetch
+git checkout master
+git merge
+
+ant ivy-bootstrap # redundent but cheap
+
 
 # TODO: run full "ant jenkins -Dtests.nightly=true"
 cd solr
