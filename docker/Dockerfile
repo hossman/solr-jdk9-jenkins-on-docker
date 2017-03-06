@@ -30,6 +30,7 @@ RUN groupadd --gid $JENKINS_GID jenkins && \
 RUN export DEBIAN_FRONTEND=noninteractive TERM=linux && \
   apt-get update && \
   apt-get -y install apt-utils ant unzip git && \
+  apt-get -y --no-install-recommends install libfontconfig1 && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
