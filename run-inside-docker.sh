@@ -41,4 +41,4 @@ ant ivy-bootstrap # redundent but cheap
 
 # TODO: run full "ant jenkins -Dtests.nightly=true"
 cd solr
-ant test
+ant test -Dtests.nightly=true
