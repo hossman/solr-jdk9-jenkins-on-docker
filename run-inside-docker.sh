@@ -31,7 +31,7 @@ if [ ! -d lucene-solr ]; then
 fi
 cd lucene-solr
 
-git clean -fx
+git clean -fdx
 git fetch
 git checkout master
 git merge
