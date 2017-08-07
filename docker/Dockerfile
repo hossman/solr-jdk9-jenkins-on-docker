@@ -19,7 +19,7 @@ FROM    openjdk:9-jdk
 
 # hack to work around weird crypto packaging issue in openjdk-9..
 # https://github.com/docker-library/openjdk/issues/101
-RUN bash -c '([[ ! -d $JAVA_HOME/conf ]] && ln -s $JAVA_HOME/lib $JAVA_HOME/conf) || (echo "Found java conf dir, package has been fixed, remove this hack"; exit -1)'
+RUN bash -c '([[ ! -d $JAVA_HOME/conf ]] && ln -s $JAVA_HOME/lib $JAVA_HOME/conf) || (echo "Found java conf dir, package has been fixed, remove this hack")'
 
 ENV JENKINS_GID=7000
 ENV JENKINS_UID=7000
